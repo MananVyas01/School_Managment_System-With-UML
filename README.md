@@ -29,11 +29,6 @@ Navigate through the main menu to access different modules of the system. The op
 
 ---
 
-## 🖼️ Screenshots
-You can add screenshots or GIFs here to demonstrate the usage and flow of the system.
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Please fork this repository and submit a pull request with your improvements or fixes. Every bit of help is appreciated! 🙌
@@ -42,7 +37,7 @@ We welcome contributions! Please fork this repository and submit a pull request 
 
 ## 📝 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License.
 
 ---
 
