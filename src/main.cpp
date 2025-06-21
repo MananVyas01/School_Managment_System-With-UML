@@ -1,9 +1,9 @@
-#include "include/Config.h"
-#include "include/Student.h"
-#include "include/Teacher.h"
-#include "include/Course.h"
-#include "include/Classroom.h"
-#include "include/Reports.h"
+#include "../include/Config.h"
+#include "../include/Student.h"
+#include "../include/Teacher.h"
+#include "../include/Course.h"
+#include "../include/Classroom.h"
+#include "../include/Reports.h"
 #include <iostream>
 #include <vector>
 #include <memory>

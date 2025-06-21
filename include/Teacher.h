@@ -15,7 +15,7 @@ private:
     std::string email;
     std::string phone;
     std::string department;
-    std::vector<std::shared_ptr<Course>> assignedCourses;
+    std::vector<std::weak_ptr<Course>> assignedCourses;
 
 public:
     Teacher(int id, const std::string& name, const std::string& subject,
@@ -29,7 +29,7 @@ public:
     const std::string& getEmail() const { return email; }
     const std::string& getPhone() const { return phone; }
     const std::string& getDepartment() const { return department; }
-    const std::vector<std::shared_ptr<Course>>& getAssignedCourses() const { return assignedCourses; }
+    const std::vector<std::weak_ptr<Course>>& getAssignedCourses() const { return assignedCourses; }
     
     // Setters
     void setName(const std::string& newName) { name = newName; }

@@ -16,7 +16,7 @@ private:
     std::string description;
     int credits;
     int maxStudents;
-    std::vector<std::shared_ptr<Student>> enrolledStudents;
+    std::vector<std::weak_ptr<Student>> enrolledStudents;
     std::shared_ptr<Teacher> assignedTeacher;
     std::unordered_map<int, std::unordered_map<std::string, bool>> attendanceRecords; // studentId -> date -> present
 
@@ -31,7 +31,7 @@ public:
     int getCredits() const { return credits; }
     int getMaxStudents() const { return maxStudents; }
     int getCurrentStudentsCount() const { return enrolledStudents.size(); }
-    const std::vector<std::shared_ptr<Student>>& getEnrolledStudents() const { return enrolledStudents; }
+    const std::vector<std::weak_ptr<Student>>& getEnrolledStudents() const { return enrolledStudents; }
     std::shared_ptr<Teacher> getAssignedTeacher() const { return assignedTeacher; }
     
     // Setters
@@ -49,7 +49,7 @@ public:
     bool enrollStudent(std::shared_ptr<Student> student);
     bool unenrollStudent(int studentId);
     bool isStudentEnrolled(int studentId) const;
-    bool isFull() const { return enrolledStudents.size() >= maxStudents; }
+    bool isFull() const { return enrolledStudents.size() >= static_cast<size_t>(maxStudents); }
     
     // Attendance management
     void recordAttendance(int studentId, const std::string& date, bool isPresent);

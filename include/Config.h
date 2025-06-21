@@ -1,4 +1,4 @@
-#ifndef CONFIG_H
+#define CONFIG_H
 #define CONFIG_H
 
 #include <string>
@@ -25,4 +25,4 @@ public:
     static const std::string REPORTS_DIR;
 };
 
-#endif // CONFIG_H
+// CONFIG_H

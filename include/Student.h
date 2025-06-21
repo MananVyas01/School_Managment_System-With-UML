@@ -15,7 +15,7 @@ private:
     int age;
     std::string email;
     std::string phone;
-    std::vector<std::shared_ptr<Course>> enrolledCourses;
+    std::vector<std::weak_ptr<Course>> enrolledCourses;
     std::unordered_map<std::string, bool> attendance; // Course name and presence
 
 public:
@@ -28,7 +28,7 @@ public:
     int getAge() const { return age; }
     const std::string& getEmail() const { return email; }
     const std::string& getPhone() const { return phone; }
-    const std::vector<std::shared_ptr<Course>>& getEnrolledCourses() const { return enrolledCourses; }
+    const std::vector<std::weak_ptr<Course>>& getEnrolledCourses() const { return enrolledCourses; }
     
     // Setters
     void setName(const std::string& newName) { name = newName; }
