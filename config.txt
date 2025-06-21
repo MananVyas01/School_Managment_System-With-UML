@@ -1,0 +1,20 @@
+# School Management System Configuration
+# File paths
+students_file=data/students.txt
+teachers_file=data/teachers.txt
+courses_file=data/courses.txt
+classrooms_file=data/classrooms.txt
+reports_dir=reports/
+
+# System limits
+max_students_per_course=50
+max_courses_per_classroom=5
+
+# Features
+backup_enabled=true
+log_level=INFO
+
+# Database settings (for future use)
+db_host=localhost
+db_port=3306
+db_name=school_db
