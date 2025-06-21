@@ -5,6 +5,8 @@
 #include <sstream>
 #include <unordered_map>
 
+using namespace std;
+
 class Student {
 public:
     int id;
@@ -153,7 +155,17 @@ public:
 };
 
 void showMenu() {
-    std::cout << "1. Add Student\n2. Add Teacher\n3. Add Course\n4. Add Classroom\n5. Assign Teacher to Course\n6. Enroll Student in Course\n7. Record Attendance\n8. Exit\n";
+    std::cout << "\n=== SCHOOL MANAGEMENT SYSTEM ===\n";
+    std::cout << "1. Add Student\n";
+    std::cout << "2. Add Teacher\n";
+    std::cout << "3. Add Course\n";
+    std::cout << "4. Add Classroom\n";
+    std::cout << "5. Assign Teacher to Course\n";
+    std::cout << "6. Enroll Student in Course\n";
+    std::cout << "7. Record Attendance\n";
+    std::cout << "8. Exit\n";
+    std::cout << "================================\n";
+    std::cout << "Enter your choice: ";
 }
 
 int main() {
@@ -168,67 +180,99 @@ int main() {
     Course::loadFromFile(courses);
     Classroom::loadFromFile(classrooms);
 
+    std::cout << "🎓 Welcome to School Management System!\n";
+    std::cout << "Loaded " << students.size() << " students, " 
+              << teachers.size() << " teachers, " 
+              << courses.size() << " courses.\n";
+
     int choice;
     do {
         showMenu();
-        std::cin >> choice;
+        
+        // Clear input buffer and ensure clean input
+        if (!(std::cin >> choice)) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout << "❌ Invalid input! Please enter a number.\n";
+            continue;
+        }
+        std::cin.ignore(10000, '\n'); // Clear the entire input buffer
+        
         switch (choice) {
             case 1: {
                 int id, age;
                 std::string name, course;
+                std::cout << "\n--- ADD STUDENT ---\n";
                 std::cout << "Enter Student ID: ";
                 std::cin >> id;
                 std::cout << "Enter Name: ";
-                std::cin >> name;
+                std::cin.ignore();
+                std::getline(std::cin, name);
                 std::cout << "Enter Age: ";
                 std::cin >> age;
                 std::cout << "Enter Course: ";
-                std::cin >> course;
+                std::cin.ignore();
+                std::getline(std::cin, course);
+                
                 students.push_back(Student(id, name, age));
                 students.back().course = course;
                 students.back().saveToFile();
+                std::cout << "✅ Student added successfully!\n";
                 break;
             }
             case 2: {
                 int id;
                 std::string name, subject;
+                std::cout << "\n--- ADD TEACHER ---\n";
                 std::cout << "Enter Teacher ID: ";
                 std::cin >> id;
                 std::cout << "Enter Name: ";
-                std::cin >> name;
+                std::cin.ignore();
+                std::getline(std::cin, name);
                 std::cout << "Enter Subject: ";
-                std::cin >> subject;
+                std::getline(std::cin, subject);
+                
                 teachers.push_back(Teacher(id, name, subject));
                 teachers.back().saveToFile();
+                std::cout << "✅ Teacher added successfully!\n";
                 break;
             }
             case 3: {
                 int id;
                 std::string name;
-                                std::cout << "Enter Course ID: ";
+                std::cout << "\n--- ADD COURSE ---\n";
+                std::cout << "Enter Course ID: ";
                 std::cin >> id;
                 std::cout << "Enter Course Name: ";
-                std::cin >> name;
+                std::cin.ignore();
+                std::getline(std::cin, name);
+                
                 courses.push_back(Course(id, name));
                 courses.back().saveToFile();
+                std::cout << "✅ Course added successfully!\n";
                 break;
             }
             case 4: {
                 int id, capacity;
+                std::cout << "\n--- ADD CLASSROOM ---\n";
                 std::cout << "Enter Classroom ID: ";
                 std::cin >> id;
                 std::cout << "Enter Classroom Capacity: ";
                 std::cin >> capacity;
+                
                 classrooms.push_back(Classroom(id, capacity));
                 classrooms.back().saveToFile();
+                std::cout << "✅ Classroom added successfully!\n";
                 break;
             }
             case 5: {
                 int courseId, teacherId;
+                std::cout << "\n--- ASSIGN TEACHER TO COURSE ---\n";
                 std::cout << "Enter Course ID: ";
                 std::cin >> courseId;
                 std::cout << "Enter Teacher ID: ";
                 std::cin >> teacherId;
+                
                 Teacher* teacher = nullptr;
                 for (auto& t : teachers) {
                     if (t.id == teacherId) {
@@ -240,20 +284,23 @@ int main() {
                     for (auto& c : courses) {
                         if (c.id == courseId) {
                             c.assignTeacher(teacher);
+                            std::cout << "✅ Teacher assigned successfully!\n";
                             break;
                         }
                     }
                 } else {
-                    std::cout << "Teacher not found." << std::endl;
+                    std::cout << "❌ Teacher not found.\n";
                 }
                 break;
             }
             case 6: {
                 int courseId, studentId;
+                std::cout << "\n--- ENROLL STUDENT IN COURSE ---\n";
                 std::cout << "Enter Course ID: ";
                 std::cin >> courseId;
                 std::cout << "Enter Student ID: ";
                 std::cin >> studentId;
+                
                 Student* student = nullptr;
                 for (auto& s : students) {
                     if (s.id == studentId) {
@@ -265,32 +312,50 @@ int main() {
                     for (auto& c : courses) {
                         if (c.id == courseId) {
                             c.addStudent(*student);
+                            std::cout << "✅ Student enrolled successfully!\n";
                             break;
                         }
                     }
                 } else {
-                    std::cout << "Student not found." << std::endl;
+                    std::cout << "❌ Student not found.\n";
                 }
                 break;
             }
             case 7: {
                 int courseId, studentId;
                 bool isPresent;
+                std::cout << "\n--- RECORD ATTENDANCE ---\n";
                 std::cout << "Enter Course ID: ";
                 std::cin >> courseId;
                 std::cout << "Enter Student ID: ";
                 std::cin >> studentId;
                 std::cout << "Is the student present? (1 for yes, 0 for no): ";
                 std::cin >> isPresent;
+                
                 for (auto& c : courses) {
                     if (c.id == courseId) {
                         c.recordAttendance(studentId, isPresent);
+                        std::cout << "✅ Attendance recorded successfully!\n";
                         break;
                     }
                 }
                 break;
             }
+            case 8: {
+                std::cout << "\n👋 Thank you for using School Management System!\n";
+                break;
+            }
+            default: {
+                std::cout << "❌ Invalid choice! Please select 1-8.\n";
+                break;
+            }
         }
+        
+        if (choice != 8) {
+            std::cout << "\nPress Enter to continue...";
+            std::cin.get();
+        }
+        
     } while (choice != 8);
 
     return 0;
