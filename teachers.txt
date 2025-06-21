@@ -1,2 +1,0 @@
-2,Saimon,OOP
-2,Saimon,OOP-With-UML

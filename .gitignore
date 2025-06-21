@@ -1,0 +1,24 @@
+# Build files
+obj/
+bin/
+*.o
+*.exe
+
+# Data files (optional - remove if you want to track data)
+data/*.txt
+
+# Reports
+reports/
+
+# Backup files
+backup/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
